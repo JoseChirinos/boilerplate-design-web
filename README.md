@@ -1,10 +1,6 @@
-# Aplicación Web - GitGrad
+# Aplicación Web - Fast Dev.
 
-Aquí estara los pasos que se usaran para la construcción de la app.
-
-# Design
-
-Se genero un template con gulp para un ágil proceso de maquetación
+Desarrolla todas las vistas que desees y visualizalos en tiempo real, una ves que estes listo optimizalo con un simple comando `gulp build` y listo.
 
 ## Instalación
 
