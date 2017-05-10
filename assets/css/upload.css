@@ -1,0 +1,45 @@
+#loader{
+    position: fixed;
+    width:100%;
+}
+#logo-git{
+    width: 250px;
+    margin-top: 150px;
+}
+.loading{
+    position: relative;
+    margin: 0 auto;
+    width: 250px;
+    height: 10px;
+    background: #e9eaeb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.percent{
+    display: block;
+    height: 10px;
+    background: #c985b2;
+    animation-name: load;
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1);
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes load{
+    0%{
+        width: 0%;
+    }
+    100%{
+        width: 100%;
+    }
+}
+
+/* Menu Nav */
+.logo-menu{
+    height: 28px;
+}
+.logo-news{
+    position: absolute;
+    left: -10px;
+    top: 10px;
+}
