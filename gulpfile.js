@@ -6,6 +6,7 @@ var gulp        = require('gulp'),
     minifycss   = require('gulp-minify-css'),
     htmlreplace = require('gulp-html-replace');
     del         = require('del'),
+    flatten     = require('gulp-flatten'),
     browserSync = require('browser-sync').create();
 
 
@@ -16,39 +17,50 @@ gulp.task('clean',function() {
 });
 // Minificar CSS
 gulp.task('minify-css', function () {
-  gulp.src('assets/css/*.css')
+  gulp.src('source/css/*.css')
   .pipe(concat('app.min.css'))
   .pipe(minifycss())
-  .pipe(gulp.dest('build/assets/css/'))
+  .pipe(gulp.dest('build/source/css/'))
+
+  gulp.src('views/**/*.css')
+  .pipe(concat('views.min.css'))
+  .pipe(minifycss())
+  .pipe(gulp.dest('build/source/css/'))
 });
 // Minificar JS
 gulp.task('minify-js', function () {
-  gulp.src('assets/js/*.js')
+  gulp.src('source/js/*.js')
   .pipe(concat('app.min.js'))
   .pipe(uglify())
-  .pipe(gulp.dest('build/assets/js/'))
+  .pipe(gulp.dest('build/source/js/'))
+
+  gulp.src('views/**/*.js')
+  .pipe(concat('views.min.js'))
+  .pipe(uglify())
+  .pipe(gulp.dest('build/source/js/'))
 });
 // Mover Recursos
 gulp.task('move',['move-images','move-icons','move-fonts'], function() {
-      gulp.src("views/**.html")
+      gulp.src("views/**/*.html")
       .pipe(htmlreplace({
-            'css': 'assets/css/app.min.css',
-            'js': 'asssets/js/app.min.js'
+            'css': ['./../source/css/app.min.css','./../source/css/views.min.css'],
+            'js': ['./../source/js/app.min.js','./../source/js/views.min.js']
         }))
+      .pipe(flatten())
       .pipe(gulp.dest('build/views'));     
       console.log('Se ha optimizado, los archivos se encuentran en la carpeta build');
 });
 gulp.task('move-images', function() {
-    gulp.src("assets/images/**.{jpg,png,svg}")
-    .pipe(gulp.dest('build/assets/images/'));
+    gulp.src("source/images/**.{jpg,png,svg}")
+    .pipe(gulp.dest('build/source/images/'));
 });
 gulp.task('move-icons', function() {
-    gulp.src("assets/icons/**.svg")
-    .pipe(gulp.dest('build/assets/icons/'));
+    gulp.src("source/icons/**.svg")
+    .pipe(gulp.dest('build/source/icons/'));
 });
 gulp.task('move-fonts', function() {
-    gulp.src("assets/fonts/**.{ttf,woff,woff2,eof,svg}")
-    .pipe(gulp.dest('build/assets/fonts'));
+    gulp.src("source/fonts/**.{ttf,woff,woff2,eof,svg}")
+    .pipe(gulp.dest('build/source/fonts'));
 });
 /* Tareas de Cambios en tiempo real DEFAULT */
 
@@ -56,16 +68,18 @@ gulp.task('move-fonts', function() {
 gulp.task('serve', function() {
     var files = [
       '*.html',
-      'views/*.html',
-      'assets/css/**/*.css',
-      'assets/js/**/*.js',
-      'assets/images/**/**.*'
+      'views/**/*.html',
+      'views/**/*.css',
+      'views/**/*.js',
+      'source/css/**/*.css',
+      'source/js/**/*.js',
+      'source/images/**/**.*'
 
     ]
     browserSync.init(files,{
         server: "./"
     });
-    /*gulp.watch("assets/ecma6/*.js", ['lint']);*/
+    /*gulp.watch("source/ecma6/*.js", ['lint']);*/
     gulp.watch("views/*.html").on('change', browserSync.reload);
 });
 

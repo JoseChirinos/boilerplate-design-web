@@ -1,0 +1,18 @@
+body{
+    background: #e9eaeb;
+    color: #2d2d2d;
+}
+
+/*** Wide card with share menu button ***/
+.demo-card-wide.mdl-card {
+    margin-top: 40px;
+    width: 350px;
+}
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url('https://getmdl.io/assets/demos/welcome_card.jpg') center / cover;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
