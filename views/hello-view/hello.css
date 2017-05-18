@@ -16,3 +16,11 @@ body{
 .demo-card-wide > .mdl-card__menu {
   color: #fff;
 }
+
+/* grillas */
+.bloque-a{
+  background: red;
+}
+.bloque-b{
+  background: yellow;
+}
