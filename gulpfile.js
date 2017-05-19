@@ -1,7 +1,5 @@
 var gulp        = require('gulp'),
     concat      = require('gulp-concat'),
-    babel       = require('gulp-babel'),
-    eslint      = require('gulp-eslint'),
     uglify      = require('gulp-uglify'),
     minifycss   = require('gulp-minify-css'),
     htmlreplace = require('gulp-html-replace');
@@ -79,7 +77,6 @@ gulp.task('serve', function() {
     browserSync.init(files,{
         server: "./"
     });
-    /*gulp.watch("source/ecma6/*.js", ['lint']);*/
     gulp.watch("views/*.html").on('change', browserSync.reload);
 });
 
